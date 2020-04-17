@@ -1,0 +1,76 @@
+#+OPTIONS: h:7
+#+OPTIONS: ^:{}
+#+TITLE: Reference Documentation
+#+AUTHOR: C* Development Team
+#+EXPORT_EXCLUDE_TAGS: LOG noexport
+#+LaTeX: \pagebreak % after the TOC
+
+#+LATEX_HEADER: \renewcommand{\organisation}{BigSQL Corporation}
+#+LATEX_HEADER: \renewcommand{\brandline}{Most-Complete Developer-Friendly PostgreSQL Distribution}
+#+LATEX_HEADER: \renewcommand{\logo}{/home/affan/workplace/bigsql-logo.eps}
+#+LATEX_HEADER: \definecolor{brandcolor}{RGB}{104, 172, 192}
+
+#+LATEX_HEADER: \renewcommand{\version}{1.0}
+#+LATEX_HEADER: \renewcommand{\client}{BigSQL}
+#+LATEX_HEADER: \renewcommand{\project}{C* FDW}
+#+LATEX_HEADER: \renewcommand{\footertitle}{C* FDW Documentation}
+
+#+LaTeX: \setcounter{section}{-1}
+
+* Revision History
+
+#+attr_LaTeX: :environment longtable :align |l|l|l|p{0.5\linewidth}|
+| Revision |       Date | Author       | Comments                                             |
+|----------+------------+--------------+------------------------------------------------------|
+|      1.0 | 2016-03-31 | Affan Salman | Created initial structure and added "SERVER OPTIONS" |
+
+#+LaTeX: \newpage
+
+* FDW DDL
+
+** SERVER OPTIONS
+
+While defining a foreign Cassandra =SERVER=, you can provide =OPTIONS=
+pertaining to connection configuration.
+
+You can do so by adding comma-separated key-value pairs to the =OPTIONS=
+clause of the =CREATE SERVER= command.
+
+The following simple example shows the key *host* with the value
+'127.0.0.1':
+
+#+BEGIN_SRC sql :exports code
+CREATE SERVER cass_serv FOREIGN DATA WRAPPER cstar_fdw
+       OPTIONS (host '127.0.0.1');
+#+END_SRC
+
+The full list of the supported =SERVER= parameters is:
+
+| Parameter Name | Required? |
+|----------------+-----------|
+| host           | Y         |
+| port           | N         |
+| protocol       | N         |
+
+The details for each of these parameters follow:
+
+*** =host=
+
+The address(es) or hostname(s) of the Cassandra server(s).
+
+- Example values: '127.0.0.1', '127.0.0.1,127.0.0.2', 'server1.domain.com'
+- Default value: N/A (mandatory parameter)
+
+*** =port=
+
+The port number of the Cassandra server(s).
+
+- Example value: 9042
+- Default value: 9042
+
+*** =protocol=
+
+The protocol version to use for connecting with the Cassandra server.
+
+- Example value: '4'
+- Default value: '4' (for cpp-driver version 2.3)

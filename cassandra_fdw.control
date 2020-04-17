@@ -1,0 +1,4 @@
+comment = 'foreign-data wrapper for querying Cassandra 3+'
+default_version = '3.1'
+module_pathname = '$libdir/cassandra_fdw'
+relocatable = true
